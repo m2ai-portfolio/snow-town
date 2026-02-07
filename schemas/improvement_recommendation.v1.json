@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "EvidenceBasis": {
+      "description": "Evidence supporting a recommendation.",
+      "properties": {
+        "outcome_record_ids": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Outcome Record Ids",
+          "type": "array"
+        },
+        "pattern_frequency": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Pattern Frequency",
+          "type": "integer"
+        },
+        "signal_strength": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Signal Strength",
+          "type": "number"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "title": "EvidenceBasis",
+      "type": "object"
+    },
+    "RecommendationType": {
+      "description": "Types of improvement recommendations.",
+      "enum": [
+        "voice_adjustment",
+        "framework_addition",
+        "framework_refinement",
+        "validation_marker_change",
+        "case_study_addition",
+        "constraint_addition",
+        "constraint_removal",
+        "claude_md_update",
+        "pipeline_change",
+        "other"
+      ],
+      "title": "RecommendationType",
+      "type": "string"
+    },
+    "TargetScope": {
+      "description": "Scope of the recommendation.",
+      "enum": [
+        "specific_persona",
+        "all_personas"
+      ],
+      "title": "TargetScope",
+      "type": "string"
+    }
+  },
+  "description": "Typed recommendation from Sky-Lynx to Academy.\n\nPrecondition: pattern_frequency >= 1.\nPostcondition: parseable by Academy without knowledge of SL internals.",
+  "properties": {
+    "contract_version": {
+      "default": "1.0.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "recommendation_id": {
+      "title": "Recommendation Id",
+      "type": "string"
+    },
+    "session_id": {
+      "default": "",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "recommendation_type": {
+      "$ref": "#/$defs/RecommendationType"
+    },
+    "target_system": {
+      "default": "persona",
+      "title": "Target System",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "suggested_change": {
+      "title": "Suggested Change",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/TargetScope",
+      "default": "all_personas"
+    },
+    "target_persona_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Persona Ids",
+      "type": "array"
+    },
+    "priority": {
+      "default": "medium",
+      "title": "Priority",
+      "type": "string"
+    },
+    "impact": {
+      "default": "",
+      "title": "Impact",
+      "type": "string"
+    },
+    "reversibility": {
+      "default": "high",
+      "title": "Reversibility",
+      "type": "string"
+    },
+    "evidence": {
+      "$ref": "#/$defs/EvidenceBasis"
+    },
+    "status": {
+      "default": "pending",
+      "title": "Status",
+      "type": "string"
+    },
+    "emitted_at": {
+      "format": "date-time",
+      "title": "Emitted At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recommendation_id",
+    "recommendation_type",
+    "title",
+    "description",
+    "suggested_change"
+  ],
+  "title": "ImprovementRecommendation",
+  "type": "object"
+}

@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "PipelineTrace": {
+      "description": "Record of an idea passing through a pipeline stage.",
+      "properties": {
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        },
+        "entered_at": {
+          "format": "date-time",
+          "title": "Entered At",
+          "type": "string"
+        },
+        "exited_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exited At"
+        },
+        "persona_used": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Persona Used"
+        }
+      },
+      "required": [
+        "stage",
+        "entered_at"
+      ],
+      "title": "PipelineTrace",
+      "type": "object"
+    },
+    "TerminalOutcome": {
+      "description": "Terminal states for an idea in the pipeline.",
+      "enum": [
+        "published",
+        "rejected",
+        "deferred",
+        "build_failed"
+      ],
+      "title": "TerminalOutcome",
+      "type": "string"
+    }
+  },
+  "description": "Record emitted when an idea reaches a terminal state.\n\nPrecondition: idea must be in a terminal state.\nPostcondition: record is append-only, written to JSONL + SQLite.\nInvariant: pipeline_trace is chronologically ordered; contract_version always present.",
+  "properties": {
+    "contract_version": {
+      "default": "1.0.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "idea_id": {
+      "title": "Idea Id",
+      "type": "integer"
+    },
+    "idea_title": {
+      "title": "Idea Title",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/TerminalOutcome"
+    },
+    "overall_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overall Score"
+    },
+    "recommendation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Recommendation"
+    },
+    "capabilities_fit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Capabilities Fit"
+    },
+    "build_outcome": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Build Outcome"
+    },
+    "artifact_count": {
+      "default": 0,
+      "title": "Artifact Count",
+      "type": "integer"
+    },
+    "tech_stack": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tech Stack",
+      "type": "array"
+    },
+    "pipeline_trace": {
+      "items": {
+        "$ref": "#/$defs/PipelineTrace"
+      },
+      "title": "Pipeline Trace",
+      "type": "array"
+    },
+    "total_duration_seconds": {
+      "default": 0.0,
+      "title": "Total Duration Seconds",
+      "type": "number"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "github_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Github Url"
+    },
+    "emitted_at": {
+      "format": "date-time",
+      "title": "Emitted At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "idea_id",
+    "idea_title",
+    "outcome"
+  ],
+  "title": "OutcomeRecord",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+"""Snow-Town inter-layer contracts.
+
+Defines the data contracts that flow between layers:
+- OutcomeRecord: Ultra Magnus -> Sky-Lynx
+- ImprovementRecommendation: Sky-Lynx -> Academy
+- PersonaUpgradePatch: Academy -> Ultra Magnus
+"""
+
+from .improvement_recommendation import (
+    EvidenceBasis,
+    ImprovementRecommendation,
+    RecommendationType,
+    TargetScope,
+)
+from .outcome_record import OutcomeRecord, PipelineTrace, TerminalOutcome
+from .persona_upgrade_patch import PersonaFieldPatch, PersonaUpgradePatch
+from .store import ContractStore
+
+__all__ = [
+    "OutcomeRecord",
+    "PipelineTrace",
+    "TerminalOutcome",
+    "ImprovementRecommendation",
+    "RecommendationType",
+    "TargetScope",
+    "EvidenceBasis",
+    "PersonaUpgradePatch",
+    "PersonaFieldPatch",
+    "ContractStore",
+]
