@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-surface: #0f172a;
+    --color-surface-raised: #1e293b;
+    --color-surface-overlay: #334155;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #334155;
+  }
+
+  body {
+    @apply bg-surface text-slate-100 antialiased;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400
+           hover:text-slate-100 hover:bg-surface-raised transition-colors;
+  }
+
+  .sidebar-link-active {
+    @apply text-slate-100 bg-surface-raised;
+  }
+
+  .card {
+    @apply bg-surface-raised rounded-xl border border-slate-700/50 p-4;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-healthy {
+    @apply bg-emerald-500/10 text-emerald-400;
+  }
+
+  .badge-idle {
+    @apply bg-slate-500/10 text-slate-400;
+  }
+
+  .badge-stale {
+    @apply bg-amber-500/10 text-amber-400;
+  }
+}
