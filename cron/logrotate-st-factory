@@ -1,4 +1,4 @@
-/var/log/snow-town/loop.log {
+/var/log/st-factory/loop.log {
     weekly
     rotate 12
     compress

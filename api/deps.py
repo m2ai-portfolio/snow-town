@@ -15,7 +15,7 @@ from api.readers.um_reader import UMReader
 # Configurable paths with defaults matching EC2 layout
 SNOW_TOWN_DATA_DIR = Path(os.environ.get(
     "SNOW_TOWN_DATA_DIR",
-    str(Path.home() / "projects" / "snow-town" / "data"),
+    str(Path.home() / "projects" / "st-factory" / "data"),
 ))
 
 ACADEMY_PERSONAS_DIR = Path(os.environ.get(
